@@ -20,7 +20,7 @@ let baseMaps = {
 
 // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
-  center: [30, 30],
+  center: [44.0, -80.0],
   zoom: 2,
   layers: [streets]
 })
@@ -28,6 +28,19 @@ let map = L.map('mapid', {
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
 
+
+// Accessing the Toronto airline routes GeoJSON URL.
+let torontoData = "https://raw.githubusercontent.com/mchjohnson13/Mapping_Earthquakes/Mapping_GeoJSON_Linestrings/Mapping_GeoJSON_LineStrings/torontoRoutes.json";
+
+// Grabbing our GeoJSON data.
+d3.json(torontoData).then(function(data) {
+  console.log(data);
+  // Creating a GeoJSON layer with the retrieved data.
+  L.geoJson(data).addTo(map);
+});
+
+
+/* 
 // Accessing the airport GeoJSON URL
 let airportData = "https://raw.githubusercontent.com/mchjohnson13/Mapping_Earthquakes/Mapping_GeoJSON_Points/Mapping_GeoJSON_Points/majorAirports.json";
 
@@ -42,4 +55,4 @@ d3.json(airportData).then(function(data) {
       .bindPopup("<h3> Airport Code: " + feature.properties.faa + "</h3> <hr> <h4>Airport Name:" + feature.properties.name + "</h4>");
     }
   }).addTo(map)
-});
+}); */
